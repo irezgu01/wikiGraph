@@ -17,12 +17,10 @@ public class Parse {
 		List<Double> probas = new ArrayList<>();
 		
 		try(Stream<String> lines = Files.lines(path)) {
-			int vertex = 1;
+			int vertex = 0;
 			boolean startProbas = false;
 			String regex = " ";
-			int nb = 1;
 			for(String line : lines.collect(Collectors.toList())){
-				int a = nb++;
 				if(line.isEmpty()){
 					startProbas = true;
 					regex = ", ";
@@ -43,12 +41,12 @@ public class Parse {
 				}
 			}
 		}
-		
+		/*
 		System.out.println("*********************GRAPHES*************************");
 		graphs.values().forEach(e -> System.out.println(" "+e));
 		System.out.println("*******************probas*************************");
 		probas.forEach(e -> System.out.println(" "+e));
-		
+		*/
 		
 		processor.execute(graphs, probas);
 	}

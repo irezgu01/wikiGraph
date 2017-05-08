@@ -5,15 +5,15 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.function.Consumer;
 
-public class AdjGraph implements Graph {
+public class AdjGraph extends AbstractGraph implements Graph {
 	
 	private final ArrayList<LinkedList<Edge>> adj;
-	private final int n;
+	
 	
 	public AdjGraph(int x) {
-		this.n =x;
-		adj = new ArrayList<>();
-		for(int i=0;i<n;i++) {
+		super(x);
+		adj = new ArrayList<>(x);
+		for(int i=0;i<x;i++) {
 			adj.add(new LinkedList<Edge>());
 		}
 	}
@@ -28,20 +28,16 @@ public class AdjGraph implements Graph {
 	}
 
 	@Override
-	public int numberOfVertices() {
-		return n;
+	public void addEdge(int i,int j) {
+		super.addEdge(i, j);
+		adj.get(i).add(new Edge(i, j));
+		
+		
 	}
 
 	@Override
-	public void addEdge(Vertex start, Vertex end) {
-		int i = start.getVertex();
-		adj.get(i).add(new Edge(i, end.getVertex()));
-	}
-
-	@Override
-	public boolean isEdge(Vertex start, Vertex end) {
-		int i = start.getVertex();
-		int j = end.getVertex();
+	public boolean isEdge(int i,int j) {
+		
 		LinkedList<Edge> list = adj.get(i);
 		for (Edge edge : list) {
 			if(edge.getEnd() == j)
@@ -59,6 +55,7 @@ public class AdjGraph implements Graph {
 		}
 		return 0;
 	}
+	
 
 	@Override
 	public Iterator<Edge> edgeIterator(int i) {
@@ -75,6 +72,16 @@ public class AdjGraph implements Graph {
 			}
 		};
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		for (int i = 0,n = this.numberOfVertices(); i < n; i++) {
+			str.append(adj.get(i));
+			str.append("\n");
+		}
+		return str.toString();
+	}
 
 	@Override
 	public void forEachEdge(int i, Consumer<Edge> consumer) {
@@ -89,21 +96,21 @@ public class AdjGraph implements Graph {
 	public static void main(String[] args) {
 		AdjGraph matrice = new AdjGraph(7);
 		
-		matrice.addEdge(new Vertex(0), new Vertex(1));
-		matrice.addEdge(new Vertex(0), new Vertex(5));
+		matrice.addEdge(0,1);
+		matrice.addEdge(0,5);
 		
-		matrice.addEdge(new Vertex(1), new Vertex(2));
-		matrice.addEdge(new Vertex(1), new Vertex(4));
+		matrice.addEdge(1,2);
+		matrice.addEdge(1,4);
 		
-		matrice.addEdge(new Vertex(2), new Vertex(6));
+		matrice.addEdge(2,6);
 		
-		matrice.addEdge(new Vertex(3), new Vertex(2));
-		matrice.addEdge(new Vertex(3), new Vertex(6));
+		matrice.addEdge(3,2);
+		matrice.addEdge(3,6);
 		
-		matrice.addEdge(new Vertex(4), new Vertex(3));
+		matrice.addEdge(4,3);
 		
-		matrice.addEdge(new Vertex(5), new Vertex(1));
-		matrice.addEdge(new Vertex(5), new Vertex(2));
+		matrice.addEdge(5,1);
+		matrice.addEdge(5,2);
 		
 		System.out.println(matrice.toString());
 		System.out.println(Graph.dijkstra(matrice, 0));
@@ -125,5 +132,7 @@ public class AdjGraph implements Graph {
 		System.out.println(matrice.numberOfEdges());
 		*/
 	}
+
+
 
 }
