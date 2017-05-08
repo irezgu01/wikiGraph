@@ -3,21 +3,16 @@ package fr.umlv.graph;
 public class Edge {
 	private final int start;
 	private final int end;
-	private final int value;
-
-	public Edge(int start, int end, int value) {
-		this.start = start;
-		this.end = end;
-		this.value = value;
-	}
 
 	public Edge(int start, int end) {
-		this(start, end, 1);
+		this.start = start;
+		this.end = end;
 	}
-
+	
 	public int getValue() {
-		return value;
+		return 1;
 	}
+	
 
 	public int getStart() {
 		return start;
@@ -29,7 +24,7 @@ public class Edge {
 
 	@Override
 	public String toString() {
-		return start + " -- " + end + " ( " + value + " )";
+		return start + " -- " + end /*+ " ( " + value + " )"*/;
 	}
 
 	@Override
@@ -38,7 +33,7 @@ public class Edge {
 			return false;
 		}
 		Edge tmp = (Edge) obj;
-		return tmp.start == start && tmp.end == end && tmp.value == value;
+		return tmp.start == start && tmp.end == end /*&& tmp.value == value*/;
 	}
 
 	@Override
@@ -47,7 +42,7 @@ public class Edge {
 		int result = 1;
 		result = prime * result + end;
 		result = prime * result + start;
-		result = prime * result + value;
+		result = prime * result /*+ value*/;
 		return result;
 	}
 }

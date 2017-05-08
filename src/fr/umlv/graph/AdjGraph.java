@@ -33,12 +33,15 @@ public class AdjGraph implements Graph {
 	}
 
 	@Override
-	public void addEdge(int i, int j, int value) {
-		adj.get(i).add(new Edge(i, j,value));
+	public void addEdge(Vertex start, Vertex end) {
+		int i = start.getVertex();
+		adj.get(i).add(new Edge(i, end.getVertex()));
 	}
 
 	@Override
-	public boolean isEdge(int i, int j) {
+	public boolean isEdge(Vertex start, Vertex end) {
+		int i = start.getVertex();
+		int j = end.getVertex();
 		LinkedList<Edge> list = adj.get(i);
 		for (Edge edge : list) {
 			if(edge.getEnd() == j)
@@ -81,41 +84,41 @@ public class AdjGraph implements Graph {
 		}
 	}
 	
+	
+	
 	public static void main(String[] args) {
 		AdjGraph matrice = new AdjGraph(7);
 		
-		matrice.addEdge(0, 1, 1);
-		matrice.addEdge(0, 5, 1);
+		matrice.addEdge(new Vertex(0), new Vertex(1));
+		matrice.addEdge(new Vertex(0), new Vertex(5));
 		
-		matrice.addEdge(1, 2, 3);
-		matrice.addEdge(1, 4, 2);
+		matrice.addEdge(new Vertex(1), new Vertex(2));
+		matrice.addEdge(new Vertex(1), new Vertex(4));
 		
-		matrice.addEdge(2, 6, 2);
+		matrice.addEdge(new Vertex(2), new Vertex(6));
 		
-		matrice.addEdge(3, 2, 2);
-		matrice.addEdge(3, 6, 5);
+		matrice.addEdge(new Vertex(3), new Vertex(2));
+		matrice.addEdge(new Vertex(3), new Vertex(6));
 		
-		matrice.addEdge(4, 3, 1);
+		matrice.addEdge(new Vertex(4), new Vertex(3));
 		
-		matrice.addEdge(5, 1, 4);
-		matrice.addEdge(5, 2, 1);
+		matrice.addEdge(new Vertex(5), new Vertex(1));
+		matrice.addEdge(new Vertex(5), new Vertex(2));
 		
-		//System.out.println(Graph.dijkstra(matrice, 0));
-		/*
-		System.out.println(Graph.bellmanFord(matrice, 0));
-		Graph.bellmanFord(matrice, 0).printShortestPathTo(3);
+		System.out.println(matrice.toString());
+		System.out.println(Graph.dijkstra(matrice, 0));
 		
 		/*
 		matrice.addEdge(2, 3, 1);
 		matrice.addEdge(2, 2, 1);
 		matrice.addEdge(1, 0, 3);
-		
-		Iterator<Edge> it = matrice.edgeIterator(2);
+		*/
+		Iterator<Edge> it = matrice.edgeIterator(0);
 		while(it.hasNext()) {
 			System.out.println(it.next());
 			
 		}
-		
+		/*
 		System.out.println(matrice.isEdge(0, 1));
 		System.out.println(matrice.isEdge(2, 2));
 		System.out.println(matrice.getWeight(1, 0));

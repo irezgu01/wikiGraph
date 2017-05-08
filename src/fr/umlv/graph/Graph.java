@@ -40,7 +40,7 @@ public interface Graph {
 	 * @throws IllegalArgumentException
 	 *             si value vaut 0 ou si il existe déjà une arête entre i et j
 	 */
-	void addEdge(int i, int j, int value);
+	void addEdge(Vertex start, Vertex end);
 
 	/**
 	 * Teste l'existence d'une arête donnée
@@ -53,7 +53,7 @@ public interface Graph {
 	 * @throws IndexOutOfBoundsException
 	 *             si i ou j n'est pas un sommet du graphe
 	 */
-	boolean isEdge(int i, int j);
+	boolean isEdge(Vertex start, Vertex end);
 
 	/**
 	 * Renvoie le poids d'une arête donnée.
@@ -138,6 +138,11 @@ public interface Graph {
 	 */
 	public static Graph makeGraphFromMatrixFile(Path path, IntFunction<Graph> factory) throws IOException {
 		return null; // TODO à implémenter
+	}
+	
+	
+	public static double epsilon(Graph g) {
+		return 1/(g.numberOfVertices() * 10);
 	}
 
 	public static ShortestPathFromOneVertex bellmanFord(Graph g, int source) {

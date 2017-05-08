@@ -37,13 +37,13 @@ public class MatGraph implements Graph {
 	}
 
 	@Override
-	public void addEdge(int i, int j, int value) {
-		mat[i][j] = value;
+	public void addEdge(Vertex start, Vertex end) {
+		mat[start.getVertex()][end.getVertex()] = 1;
 	}
 
 	@Override
-	public boolean isEdge(int i, int j) {
-		return mat[i][j] != 0;
+	public boolean isEdge(Vertex start, Vertex end) {
+		return mat[start.getVertex()][end.getVertex()] != 0;
 	}
 
 	@Override
@@ -80,7 +80,7 @@ public class MatGraph implements Graph {
 				lastindex = index;
 				index = findNext(index + 1);
 
-				return new Edge(i, lastindex, mat[i][lastindex]);
+				return new Edge(i, lastindex /*, mat[i][lastindex]*/);
 			}
 		};
 	}
@@ -99,7 +99,7 @@ public class MatGraph implements Graph {
 	public void forEachEdge(int i, Consumer<Edge> consumer) {
 		for (int j = 0; j < n; j++) {
 			int value = mat[i][j];
-			consumer.accept(new Edge(i, j, value));
+			consumer.accept(new Edge(i, j /*, value*/));
 		}
 
 	}
@@ -147,21 +147,21 @@ public class MatGraph implements Graph {
 	
 	public static void main(String[] args) {
 		MatGraph matrice = new MatGraph(7);
-		matrice.addEdge(0, 1, 1);
-		matrice.addEdge(0, 5, 1);
+		matrice.addEdge(new Vertex(0), new Vertex(1));
+		matrice.addEdge(new Vertex(0), new Vertex(5));
 		
-		matrice.addEdge(1, 2, 3);
-		matrice.addEdge(1, 4, 2);
+		matrice.addEdge(new Vertex(1), new Vertex(2));
+		matrice.addEdge(new Vertex(1), new Vertex(4));
 		
-		matrice.addEdge(2, 6, 2);
+		matrice.addEdge(new Vertex(2), new Vertex(6));
 		
-		matrice.addEdge(3, 2, 2);
-		matrice.addEdge(3, 6, 5);
+		matrice.addEdge(new Vertex(3), new Vertex(2));
+		matrice.addEdge(new Vertex(3), new Vertex(6));
 		
-		matrice.addEdge(4, 3, 1);
+		matrice.addEdge(new Vertex(4), new Vertex(3));
 		
-		matrice.addEdge(5, 1, 4);
-		matrice.addEdge(5, 2, 1);
+		matrice.addEdge(new Vertex(5), new Vertex(1));
+		matrice.addEdge(new Vertex(5), new Vertex(2));
 		
 		System.out.println(matrice.toString());
 		System.out.println(Graph.dijkstra(matrice, 0));
