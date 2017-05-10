@@ -20,9 +20,7 @@ public class Parse {
 			int vertex = 1;
 			boolean startProbas = false;
 			String regex = " ";
-			int nb = 1;
 			for(String line : lines.collect(Collectors.toList())){
-				int a = nb++;
 				if(line.isEmpty()){
 					startProbas = true;
 					regex = ", ";

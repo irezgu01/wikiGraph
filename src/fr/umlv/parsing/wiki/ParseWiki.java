@@ -18,7 +18,6 @@ public class ParseWiki {
 			String vertex;
 			String regex = "\\|";
 			for (String line : lines.collect(Collectors.toList())) {
-
 				String[] tokens = line.split(regex);
 				vertex = tokens[0];
 				graphs.put(vertex, new ArrayList<>());
@@ -30,8 +29,6 @@ public class ParseWiki {
 
 		System.out.println("*********************GRAPHES*************************");
 		graphs.keySet().forEach(e -> System.out.println(e + " -> "+ graphs.get(e)));
-		//graphs.values().forEach(e -> System.out.println(" " + e));
-
 		processor.execute(graphs);
 
 	}
