@@ -20,6 +20,7 @@ public class Parse {
 			int vertex = 1;
 			boolean startProbas = false;
 			String regex = " ";
+			
 			for(String line : lines.collect(Collectors.toList())){
 				if(line.isEmpty()){
 					startProbas = true;

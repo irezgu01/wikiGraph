@@ -17,6 +17,7 @@ public class ParseWiki {
 		try (Stream<String> lines = Files.lines(path)) {
 			String vertex;
 			String regex = "\\|";
+			
 			for (String line : lines.collect(Collectors.toList())) {
 				String[] tokens = line.split(regex);
 				vertex = tokens[0];
