@@ -1,9 +1,8 @@
-package fr.umlv.calc;
+package fr.umlv.graph.matrice;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.umlv.graph.ExtractGraph;
 import fr.umlv.graph.Graph;
 import fr.umlv.graph.Vertex;
 

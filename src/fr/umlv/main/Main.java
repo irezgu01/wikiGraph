@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
 
-import fr.umlv.calc.CalculationOfValues;
-import fr.umlv.graph.ExtractGraph;
 import fr.umlv.graph.Graph;
+import fr.umlv.graph.matrice.CalculationOfValues;
+import fr.umlv.graph.matrice.ExtractGraph;
 
 public class Main {
 	

@@ -1,10 +1,12 @@
-package fr.umlv.graph;
+package fr.umlv.graph.matrice;
 
+import fr.umlv.graph.*;
+import fr.umlv.parsing.matrice.*;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 
-import fr.umlv.parsing.Parse;
+
 
 public class ExtractGraph {
 
