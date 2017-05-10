@@ -7,7 +7,7 @@ public class Vertex {
 	
 	public Vertex(int vertex) {
 		this.vertex = vertex;
-		neighbors = 1;
+		neighbors = 0;
 		proba = 1;
 	}
 
@@ -29,6 +29,11 @@ public class Vertex {
 
 	public void setProba(double proba) {
 		this.proba = proba;
+	}
+	@Override
+	public String toString() {
+		
+		return "Je suis le sommet : "+vertex+", j'ai : "+neighbors+" voisin(s) et ma proba vaut : "+proba;
 	}
 	
 

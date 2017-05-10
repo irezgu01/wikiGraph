@@ -1,6 +1,7 @@
 package fr.umlv.graph;
 
 import java.util.Arrays;
+
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -8,20 +9,19 @@ import java.util.NoSuchElementException;
 import java.util.concurrent.atomic.LongAdder;
 import java.util.function.Consumer;
 
-import javax.annotation.processing.SupportedSourceVersion;
-
-public class MatGraph implements Graph {
+public class MatGraph extends AbstractGraph implements Graph {
 	private final int[][] mat;
-	private final int n;
+;
 
 	public MatGraph(int x) {
-		this.n = x;
+		super(x);
 		mat = new int[x][x];
 	}
 
 	@Override
 	public int numberOfEdges() {
 		int count = 0;
+		int n = this.numberOfVertices();
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < n; j++) {
 				if (mat[i][j] != 0)
@@ -32,18 +32,15 @@ public class MatGraph implements Graph {
 	}
 
 	@Override
-	public int numberOfVertices() {
-		return n;
+	public void addEdge(int i,int j) {
+		super.addEdge(i, j);
+		mat[i][j] = 1;
+		
 	}
 
 	@Override
-	public void addEdge(Vertex start, Vertex end) {
-		mat[start.getVertex()][end.getVertex()] = 1;
-	}
-
-	@Override
-	public boolean isEdge(Vertex start, Vertex end) {
-		return mat[start.getVertex()][end.getVertex()] != 0;
+	public boolean isEdge(int i,int j) {
+		return mat[i][j] != 0;
 	}
 
 	@Override
@@ -51,13 +48,14 @@ public class MatGraph implements Graph {
 		return mat[i][j];
 	}
 
+
 	@Override
 	public Iterator<Edge> edgeIterator(int i) {
 		return new Iterator<Edge>() {
 
 			int index = findNext(0);
 			int lastindex = 0;
-
+			
 			private int findNext(int dst) {
 				for (int j = dst; j < n; j++) {
 					if (mat[i][j] != 0)
@@ -98,7 +96,7 @@ public class MatGraph implements Graph {
 	@Override
 	public void forEachEdge(int i, Consumer<Edge> consumer) {
 		for (int j = 0; j < n; j++) {
-			int value = mat[i][j];
+			//int value = mat[i][j];
 			consumer.accept(new Edge(i, j /*, value*/));
 		}
 
@@ -147,21 +145,22 @@ public class MatGraph implements Graph {
 	
 	public static void main(String[] args) {
 		MatGraph matrice = new MatGraph(7);
-		matrice.addEdge(new Vertex(0), new Vertex(1));
-		matrice.addEdge(new Vertex(0), new Vertex(5));
 		
-		matrice.addEdge(new Vertex(1), new Vertex(2));
-		matrice.addEdge(new Vertex(1), new Vertex(4));
+		matrice.addEdge(0,1);
+		matrice.addEdge(0,5);
 		
-		matrice.addEdge(new Vertex(2), new Vertex(6));
+		matrice.addEdge(1,2);
+		matrice.addEdge(1,4);
 		
-		matrice.addEdge(new Vertex(3), new Vertex(2));
-		matrice.addEdge(new Vertex(3), new Vertex(6));
+		matrice.addEdge(2,6);
 		
-		matrice.addEdge(new Vertex(4), new Vertex(3));
+		matrice.addEdge(3,2);
+		matrice.addEdge(3,6);
 		
-		matrice.addEdge(new Vertex(5), new Vertex(1));
-		matrice.addEdge(new Vertex(5), new Vertex(2));
+		matrice.addEdge(4,3);
+		
+		matrice.addEdge(5,1);
+		matrice.addEdge(5,2);
 		
 		System.out.println(matrice.toString());
 		System.out.println(Graph.dijkstra(matrice, 0));

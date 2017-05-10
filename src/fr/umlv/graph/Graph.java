@@ -1,9 +1,11 @@
 package fr.umlv.graph;
 
 import java.io.IOException;
+
 import java.nio.file.Path;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.function.Consumer;
 import java.util.function.IntFunction;
 
@@ -24,7 +26,7 @@ public interface Graph {
 	 * 
 	 * @return le nombre de sommets du graphe
 	 */
-	int numberOfVertices();
+	//int numberOfVertices();
 
 	/**
 	 * Permet d'ajouter une arête orientée et pondérée au graphe.
@@ -40,7 +42,7 @@ public interface Graph {
 	 * @throws IllegalArgumentException
 	 *             si value vaut 0 ou si il existe déjà une arête entre i et j
 	 */
-	void addEdge(Vertex start, Vertex end);
+	void addEdge(int i,int j);
 
 	/**
 	 * Teste l'existence d'une arête donnée
@@ -53,7 +55,7 @@ public interface Graph {
 	 * @throws IndexOutOfBoundsException
 	 *             si i ou j n'est pas un sommet du graphe
 	 */
-	boolean isEdge(Vertex start, Vertex end);
+	boolean isEdge(int i,int j);
 
 	/**
 	 * Renvoie le poids d'une arête donnée.
@@ -141,9 +143,6 @@ public interface Graph {
 	}
 	
 	
-	public static double epsilon(Graph g) {
-		return 1/(g.numberOfVertices() * 10);
-	}
 
 	public static ShortestPathFromOneVertex bellmanFord(Graph g, int source) {
 		int[] d = new int[g.numberOfVertices()];
@@ -185,6 +184,15 @@ public interface Graph {
 		}
 		return new ShortestPathFromOneVertex(source, d, pi);
 	}
+
+	int numberOfVertices();
+	
+	public ArrayList<Vertex> getVerticles();
+	
+	
+	public ArrayList<LinkedList<Vertex>> getListOfpredecessors();
+	
+	public  double epsilon();
 
 	public static ShortestPathFromOneVertex dijkstra(Graph g, int source) {
 		int[] d = new int[g.numberOfVertices()];
