@@ -17,7 +17,7 @@ public class Parse {
 		List<Double> probas = new ArrayList<>();
 		
 		try(Stream<String> lines = Files.lines(path)) {
-			int vertex = 1;
+			int vertex = 0;
 			boolean startProbas = false;
 			String regex = " ";
 			
