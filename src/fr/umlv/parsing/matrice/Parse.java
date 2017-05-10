@@ -1,4 +1,4 @@
-package fr.umlv.parsing;
+package fr.umlv.parsing.matrice;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -53,7 +53,7 @@ public class Parse {
 		processor.execute(graphs, probas);
 	}
 	public static void main(String[] args) throws IOException {
-		parse(Paths.get("/home/hamed/git/wikiGraph/bin/alea/alea10-40.txt"),(e,f)-> System.out.println(" tout est nickel : "+e.keySet()));
+		parse(Paths.get("/home/cho/alea/alea10-40.txt"),(e,f)-> System.out.println(" tout est nickel : "+e.keySet()));
 	}
 	
 
