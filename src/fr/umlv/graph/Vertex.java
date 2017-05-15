@@ -16,7 +16,7 @@ public class Vertex {
 	}
 
 	public int getNeighbors() {
-		return neighbors;
+		return neighbors + 1;
 	}
 
 	public double getProba() {
