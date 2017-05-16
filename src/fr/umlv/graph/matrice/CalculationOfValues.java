@@ -1,6 +1,7 @@
 package fr.umlv.graph.matrice;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import fr.umlv.graph.Graph;
@@ -26,27 +27,53 @@ public class CalculationOfValues {
 		int i ;
 		double epsilon = graph.epsilon();
 		double compareValue = ExtractGraph.VALUES.get(0);
+		int n;
+		double sumtotaleInit = 0;
+		for(int kk = 0;kk < nb;kk++){
+			sumtotaleInit +=verticles.get(kk).getProba();
+		}
+	//	System.out.println("Proba totale : "+sumtotaleInit);
 
 		for (i = 0; i < k; i++) {
+			double sumtotale = 0;
+			Double[] probas =  new Double[nb];
 			for (int j = 0; j < nb; j++) {
 				double sum = 0.0;
-				int n = verticles.get(j).getNeighbors();
+				n = 0;
 				List<Vertex> pred = graph.getListOfpredecessors().get(j);
+				
 				for(Vertex v : pred){
-					if(n!=0){
+					n = v.getNeighbors();
 						sum += ((1 - epsilon)/n) * v.getProba();
-					}
 				}
-				if(n!=0){
-					sum += (1.0 / n) * probaSuperNoeud;
-				}
-				verticles.get(j).setProba(sum);
+				//On rajoute le cas où le predecesseur est le super noeud
+				
+					sum += (1.0/nb) * probaSuperNoeud;
+				
+				
+				//On ajoute la propriété que toutes les pages pointent vers elles-même
+				n = verticles.get(j).getNeighbors();
+					sum += ((1 - epsilon)/n) * verticles.get(j).getProba();
+				
+				//verticles.get(j).setProba(sum);
+					probas[j] = sum;
+				sumtotale += sum;
 			}
-			probaSuperNoeud = probaSuperNoeud(verticles,epsilon);
+			
 			if(compareValue == probaSuperNoeud){
 				System.out.println("YESSSSSSSSSSS");
 				break;
 			}
+			probaSuperNoeud = probaSuperNoeud(verticles,epsilon,nb);
+			
+			System.out.println("Proba totale : "+(sumtotale+probaSuperNoeud));
+			for(int ii = 0;ii <nb;ii++){
+				
+				verticles.get(ii).setProba(probas[ii]);
+			}
+			System.out.println(Arrays.toString(probas));
+			System.out.println("super noeud "+probaSuperNoeud);
+
 		}
 		System.out.println("k vaut : "+i);
 		result.add(probaSuperNoeud);
@@ -56,7 +83,7 @@ public class CalculationOfValues {
 		return result;
 	}
 
-	private static double probaSuperNoeud(List<Vertex> verticles,double epsilon) {
+	private static double probaSuperNoeud(List<Vertex> verticles,double epsilon,int nb) {
 		
 		double sum = 0;
 		for(Vertex v : verticles){
