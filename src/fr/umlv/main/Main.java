@@ -18,6 +18,7 @@ public class Main {
 		if(args.length != 2){
 			usage();
 		}
+		
 		int type = Integer.parseInt(args[0]);
 		int k = Integer.parseInt(args[1]);
 		if((type != 1 && type !=2) || (k <=0 || k>10_000)){
@@ -26,7 +27,7 @@ public class Main {
 		
 		//choice 1 --> AdjGraph, choice 2 --> MatGraph
 		Graph graph = ExtractGraph.constGraph(Paths.get("/home/hamed/Bureau/alea/alea1000-10000.txt"),type);
-		CalculationOfValues.calculator(graph, k);
+		CalculationOfValues.calculator(graph, k); 
 	}
 
 }

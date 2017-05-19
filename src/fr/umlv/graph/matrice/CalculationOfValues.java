@@ -81,7 +81,6 @@ public class CalculationOfValues {
 
 				verticles.get(ii).setProba(probas.get(ii+1));
 			}
-
 		}
 		System.out.println("Le pourcentage d'erreur max observé pour cette valeur k ("+k+") est de "+ comparePageRank(probas));
 		System.out.println("La valeur k assez proche de la solution est "+goodK+" et le pourcentage d'erreur est :"+minError);
