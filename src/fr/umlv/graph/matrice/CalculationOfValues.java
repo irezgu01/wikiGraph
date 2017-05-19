@@ -94,6 +94,7 @@ public class CalculationOfValues {
 		}
 		return sum;
 	}
+	
 
 	private static double comparePageRank(List<Double> calculatedValues){
 		int n = calculatedValues.size();

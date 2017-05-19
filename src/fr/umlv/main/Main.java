@@ -25,6 +25,7 @@ public class Main {
 			usage();
 		}
 		
+		
 		//choice 1 --> AdjGraph, choice 2 --> MatGraph
 		Graph graph = ExtractGraph.constGraph(Paths.get("/home/hamed/Bureau/alea/alea1000-10000.txt"),type);
 		CalculationOfValues.calculator(graph, k); 
