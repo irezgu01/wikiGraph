@@ -10,11 +10,10 @@ import java.util.List;
 
 public class ExtractGraph {
 
-	public static  List<Double> VALUES = null;
+	private static  List<Double> VALUES = null;
 	private static Graph graph = null;
 	
 	public static Graph constGraph(Path path,int type) throws IOException{
-		
 		
 		Parse.parse(path, (map,probas)-> {
 			Graph g;
@@ -44,6 +43,9 @@ public class ExtractGraph {
 		});
 		
 		return graph;
+	}
+	public static List<Double> getValues(){
+		return VALUES;
 	}
 
 }
