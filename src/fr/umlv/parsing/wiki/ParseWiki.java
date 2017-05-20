@@ -62,7 +62,6 @@ public class ParseWiki {
 		graphs.keySet().forEach(e -> System.out.println(e + " -> " + graphs.get(e)));
 		// System.out.println("*******************map*************************");
 		// keys.keySet().forEach(e -> System.out.println(e + "-> " +
-		// keys.get(e)));
 		processor.execute(graphs, keys);
 
 	}

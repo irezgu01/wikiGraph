@@ -13,7 +13,6 @@ public class ExtractGraph {
 	
 	public static Graph constGraph(Path path,int type) throws IOException{
 		
-		
 		ParseWiki.parse(path , (map,keys) -> {
 			Graph g;
 			int nb = map.size();
