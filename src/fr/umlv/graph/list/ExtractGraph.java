@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 
-
-
 public class ExtractGraph {
 
 	public static  List<Double> VALUES = null;
