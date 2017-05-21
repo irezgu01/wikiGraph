@@ -142,42 +142,5 @@ public class MatGraph extends AbstractGraph implements Graph {
 
 		return null;
 	}
-	
-	public static void main(String[] args) {
-		MatGraph matrice = new MatGraph(7);
-		
-		matrice.addEdge(0,1);
-		matrice.addEdge(0,5);
-		
-		matrice.addEdge(1,2);
-		matrice.addEdge(1,4);
-		
-		matrice.addEdge(2,6);
-		
-		matrice.addEdge(3,2);
-		matrice.addEdge(3,6);
-		
-		matrice.addEdge(4,3);
-		
-		matrice.addEdge(5,1);
-		matrice.addEdge(5,2);
-		
-		System.out.println(matrice.toString());
-		System.out.println(Graph.dijkstra(matrice, 0));
-		/*
-		 * System.out.println(Graph.bellmanFord(matrice, 0));
-		 */
-		Graph.bellmanFord(matrice, 0).printShortestPathTo(6);
-		/*
-		List<Integer> profondeur = DFS(matrice);
-		System.out.println(profondeur);
-		
-		/*
-		System.out.println(matrice.isEdge(0, 1));
-		System.out.println(matrice.isEdge(2, 2));
-		System.out.println(matrice.getWeight(1, 0));
-		System.out.println(matrice.numberOfEdges());
-		*/
-	}
 
 }

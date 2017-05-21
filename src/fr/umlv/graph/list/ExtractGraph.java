@@ -1,40 +1,36 @@
 package fr.umlv.graph.list;
 
-import fr.umlv.graph.*;
-import fr.umlv.parsing.wiki.*;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.List;
+
+import fr.umlv.graph.AdjGraphWiki;
+import fr.umlv.parsing.wiki.ParseWiki;
 
 public class ExtractGraph {
 
-	public static  List<Double> VALUES = null;
-	private static Graph graph = null;
-	
-	public static Graph constGraph(Path path,int type) throws IOException{
-		
-		ParseWiki.parse(path , (map,keys) -> {
-			Graph g;
-			int nb = map.size();
-			switch (type) {
-			case 1:
-				g = new AdjGraph(nb);
-				break;
-			case 2:
-				g = new MatGraph(nb);
-				break;
-			default:
-				throw new IllegalArgumentException("Unknown type of graph");
-			}
+	public static List<Double> VALUES = null;
+	public static  HashMap<Integer, List<Integer>> graphNeighbors = new HashMap<>();
+	public static HashMap<Integer, String> correspondances = new HashMap<>(); 
+	public static AdjGraphWiki graphPredecessor = new AdjGraphWiki();
+
+	public static AdjGraphWiki constGraph(Path path) throws IOException {
+
+		ParseWiki.parse(path, (map, keys) -> {
 			for (Integer key : map.keySet()) {
-				for (Integer value : map.get(key)) {
-					g.addEdge(key, value);
+				List<Integer> list = map.get(key);
+				for (Integer value : list) {
+					graphPredecessor.addEdge(value, key);
 				}
+				
 			}
-			graph = g;			
+			keys.forEach((k,v)->correspondances.put(v, k));
+			graphNeighbors.putAll(map);
 		});
+		System.out.println("graphPredecessor is over");
 		
-		return graph;
+		return graphPredecessor;
 	}
 
 }

@@ -31,6 +31,14 @@ public class Vertex {
 		this.proba = proba;
 	}
 	@Override
+	public boolean equals(Object arg0) {
+		if(!(arg0 instanceof Vertex)) {
+			return false;
+		}
+		Vertex v = (Vertex)arg0;
+		return v.getVertex() == this.vertex;
+	}
+	@Override
 	public String toString() {
 		
 		return "Je suis le sommet : "+vertex+", j'ai : "+neighbors+" voisin(s) et ma proba vaut : "+proba;

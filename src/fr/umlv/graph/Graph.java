@@ -138,53 +138,7 @@ public interface Graph {
 	 *         données dans le fihier indiqué dans path
 	 * @throws IOException
 	 */
-	public static Graph makeGraphFromMatrixFile(Path path, IntFunction<Graph> factory) throws IOException {
-		return null; // TODO à implémenter
-	}
 	
-	
-
-	public static ShortestPathFromOneVertex bellmanFord(Graph g, int source) {
-		int[] d = new int[g.numberOfVertices()];
-		int[] pi = new int[g.numberOfVertices()];
-		for (int i = 0; i < g.numberOfVertices(); i++) {
-			pi[i] = -1;
-			if (source == i) {
-				d[i] = 0;
-			} else {
-				d[i] = maxValue;
-			}
-		}
-		for (int i = 0; i < g.numberOfVertices() - 1; i++) {
-			for (int x = 0; x < g.numberOfVertices(); x++) {
-				Iterator<Edge> it = g.edgeIterator(x);
-				while (it.hasNext()) {
-					Edge edge = it.next();
-					int y = edge.getEnd();
-					// System.out.println(x+"-> "+y);
-					if (d[x] + edge.getValue() < d[y]) {
-						d[y] = d[x] + edge.getValue();
-						pi[y] = x;
-					}
-					// System.out.println(Arrays.toString(d) + " " +
-					// Arrays.toString(pi));
-				}
-			}
-
-		}
-		for (int x = 0; x < g.numberOfVertices(); x++) {
-			Iterator<Edge> it = g.edgeIterator(x);
-			while (it.hasNext()) {
-				Edge edge = it.next();
-				int y = edge.getEnd();
-				if (d[x] + edge.getValue() < d[y]) {
-					throw new IllegalStateException();
-				}
-			}
-		}
-		return new ShortestPathFromOneVertex(source, d, pi);
-	}
-
 	int numberOfVertices();
 	
 	public ArrayList<Vertex> getVerticles();
@@ -193,35 +147,6 @@ public interface Graph {
 	public ArrayList<LinkedList<Vertex>> getListOfpredecessors();
 	
 	public  double epsilon();
-
-	public static ShortestPathFromOneVertex dijkstra(Graph g, int source) {
-		int[] d = new int[g.numberOfVertices()];
-		int[] pi = new int[g.numberOfVertices()];
-		for (int i = 0; i < g.numberOfVertices(); i++) {
-			pi[i] = -1;
-			if (source == i) {
-				d[i] = 0;
-			} else {
-				d[i] = maxValue;
-			}
-		}
-		int s = source;
-		while (s != -1) {
-			for (int x = 0; x < g.numberOfVertices(); x++) {
-				Iterator<Edge> it = g.edgeIterator(x);
-				while (it.hasNext()) {
-					Edge edge = it.next();
-					int y = edge.getEnd();
-					if (d[x] + edge.getValue() < d[y]) {
-						d[y] = d[x] + edge.getValue();
-						pi[y] = x;
-					}
-				}
-			}
-			s = minmum(d);
-		}
-		return new ShortestPathFromOneVertex(source, d, pi);
-	}
 
 	static int minmum(int[] d) {
 		int min = -1;

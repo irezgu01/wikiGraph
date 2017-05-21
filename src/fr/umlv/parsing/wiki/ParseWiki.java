@@ -22,7 +22,7 @@ public class ParseWiki {
 			boolean added = true;
 			for (String line : lines.collect(Collectors.toList())) {
 				String[] tokens = line.split(regex);
-
+				
 				if (keys.get(tokens[0]) == null) {
 					keys.put(tokens[0], sommet);
 					added = true;
@@ -54,20 +54,35 @@ public class ParseWiki {
 					}
 				}
 				redondance.clear();
-				sommet++;
+				if(added) {					
+					sommet++;
+				}
 			}
 		}
-
-		System.out.println("*********************GRAPHES*************************");
-		graphs.keySet().forEach(e -> System.out.println(e + " -> " + graphs.get(e)));
-		// System.out.println("*******************map*************************");
-		// keys.keySet().forEach(e -> System.out.println(e + "-> " +
+		cleanning(graphs);
+		System.out.println("Parsing done");
+//		System.out.println("*********************GRAPHES*************************");
+//		graphs.keySet().forEach(e -> System.out.println(e + " -> " + graphs.get(e)));
+//		System.out.println("*******************map*************************");
+//		keys.keySet().forEach(e -> System.out.println(e + "-> " + keys.get(e)));
 		processor.execute(graphs, keys);
 
 	}
 
+	private static void cleanning(HashMap<Integer, List<Integer>> graph) {
+		for (Integer sommet : graph.keySet()) {
+			List<Integer> mapped = new ArrayList<>();
+			for (Integer noeud : graph.get(sommet)) {
+				if (graph.containsKey(noeud)) {
+					mapped.add(noeud);
+				}
+			}
+			graph.put(sommet, mapped);
+		}
+	}
+
 	public static void main(String[] args) throws IOException {
-		parse(Paths.get("/home/cho/wikis/wiki-cree.txt"), (e, f) -> System.out.println("done"));
+		parse(Paths.get("/home/cho/Desktop/graph.txt"), (e, f) -> System.out.println("Parsing done"));
 	}
 
 }
