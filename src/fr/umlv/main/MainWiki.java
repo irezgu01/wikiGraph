@@ -22,7 +22,7 @@ public class MainWiki {
 		probas.keySet().forEach(e-> System.out.println(correspondance.get(e)+ " -> " +probas.get(e)));
 		
 		System.err.println("*******Done*********");
-		probas.entrySet().stream().sorted(Map.Entry.comparingByValue()).limit(limit).forEach(entry->{
+		probas.entrySet().stream().sorted(Map.Entry.comparingByValue((a,b)-> Double.compare(b,a))).limit(limit).forEach(entry->{
 			System.out.println(correspondance.get(entry.getKey()) + " : " + entry.getValue());
 		});
 		
