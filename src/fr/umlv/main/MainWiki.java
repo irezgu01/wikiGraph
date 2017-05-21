@@ -13,6 +13,7 @@ import fr.umlv.graph.list.ExtractGraph;
 public class MainWiki {
 	public static void main(String[] args) throws IOException {
 		if(args.length!=3) {
+			
 			System.out.println("usage : ./main path | k | x valeurs à afficher");
 		}
 		int k = Integer.valueOf(args[1]);
